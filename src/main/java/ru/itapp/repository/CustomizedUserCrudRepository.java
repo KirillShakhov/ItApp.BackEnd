@@ -8,4 +8,5 @@ import ru.itapp.entity.User;
 @Repository
 public interface CustomizedUserCrudRepository extends CrudRepository<User, String> {
 
+    boolean existsByEmail(String email);
 }

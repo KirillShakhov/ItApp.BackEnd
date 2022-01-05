@@ -5,8 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 
 @Getter
@@ -21,6 +20,10 @@ public class User {
     @JsonView(View.User.class)
     private String username;
 
+    @Column(name = "active", unique = true, nullable = false)
+    @JsonView(View.User.class)
+    private boolean active;
+
     @Column(name = "email", unique = true, nullable = false)
     @JsonView(View.User.class)
     private String email;
@@ -28,6 +31,10 @@ public class User {
 
     @Column(name = "pass", nullable = false)
     private String pass;
+
+    @ManyToMany
+    private HashSet<Role> roles;
+
 
     @Column(name = "registration_date", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -52,5 +59,9 @@ public class User {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void setActive(boolean b) {
+
     }
 }
