@@ -31,14 +31,14 @@ public class User {
     private String email;
 
 
-    @OneToOne
-    @JoinColumn(name = "user_profile_ID")
-    private Profile userProfile;
+//    @OneToOne
+//    @JoinColumn(name = "user_profile_ID")
+//    private Profile userProfile;
 
     @Column(name = "pass", nullable = false)
     private String password;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_and_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -47,16 +47,15 @@ public class User {
     private Set<Role> roles;
 
 
-    @Column(name = "registration_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @JsonView(View.User.class)
-    private Date registration_date;
+//    @Column(name = "registration_date", nullable = true)
+//    @Temporal(TemporalType.DATE)
+//    @JsonView(View.User.class)
+//    private Date registration_date = java.util.Calendar.getInstance().getTime();
 
     public User(String login, String email, String pass) {
         this.username = login;
         this.email = email;
         this.password = pass;
-        this.registration_date = java.util.Calendar.getInstance().getTime();
     }
 
     public User(User user){
@@ -64,7 +63,6 @@ public class User {
         username = user.username;
         email = user.email;
         password = user.password;
-        registration_date = user.registration_date;
         roles = user.getRoles();
     }
 

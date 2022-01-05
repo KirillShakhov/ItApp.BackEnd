@@ -1,6 +1,7 @@
 package ru.itapp.endpoint;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itapp.entity.InstaUserDetails;
 import ru.itapp.entity.User;
+import ru.itapp.entity.View;
 import ru.itapp.exeptions.ResourceNotFoundException;
 import ru.itapp.payload.UserSummary;
 import ru.itapp.services.UserDataService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -31,12 +36,18 @@ public class UserEndpoint {
 
         return  userService
                 .getById(username)
-                .map(user -> ResponseEntity.ok(user))
+                .map(ResponseEntity::ok)
                 .orElseThrow(() -> new ResourceNotFoundException(username));
     }
 
+    @JsonView(View.User.class)
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAll() {
+//        Map<String, Object> map = new HashMap<>();
+//        log.info("retrieving all users");
+//        map.put("list", userService.findAll());
+//        map.put("status", "ok");
+//        return map;
         log.info("retrieving all users");
 
         return ResponseEntity
@@ -62,8 +73,8 @@ public class UserEndpoint {
         return UserSummary
                 .builder()
                 .username(userDetails.getUsername())
-                .name(userDetails.getUserProfile().getDisplayName())
-                .profilePicture(userDetails.getUserProfile().getProfilePictureUrl())
+//                .name(userDetails.getUserProfile().getDisplayName())
+//                .profilePicture(userDetails.getUserProfile().getProfilePictureUrl())
                 .build();
     }
 
@@ -81,8 +92,8 @@ public class UserEndpoint {
         return UserSummary
                 .builder()
                 .username(user.getUsername())
-                .name(user.getUserProfile().getDisplayName())
-                .profilePicture(user.getUserProfile().getProfilePictureUrl())
+//                .name(user.getUserProfile().getDisplayName())
+//                .profilePicture(user.getUserProfile().getProfilePictureUrl())
                 .build();
     }
 }

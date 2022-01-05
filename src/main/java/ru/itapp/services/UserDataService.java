@@ -11,6 +11,7 @@ import ru.itapp.entity.Role;
 import ru.itapp.entity.User;
 import ru.itapp.exeptions.EmailAlreadyExistsException;
 import ru.itapp.exeptions.UsernameAlreadyExistsException;
+import ru.itapp.repository.CustomizedProfileCrudRepository;
 import ru.itapp.repository.CustomizedUserCrudRepository;
 
 import javax.transaction.Transactional;
@@ -23,14 +24,16 @@ import java.util.Optional;
 @Slf4j
 public class UserDataService {
     private final CustomizedUserCrudRepository customizedUserCrudRepository;
+    private final CustomizedProfileCrudRepository customizedProfileCrudRepository;
 
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private AuthenticationManager authenticationManager;
     @Autowired private JwtTokenProvider tokenProvider;
 
     @Autowired
-    public UserDataService(CustomizedUserCrudRepository customizedUserCrudRepository) {
+    public UserDataService(CustomizedUserCrudRepository customizedUserCrudRepository, CustomizedProfileCrudRepository customizedProfileCrudRepository) {
         this.customizedUserCrudRepository = customizedUserCrudRepository;
+        this.customizedProfileCrudRepository = customizedProfileCrudRepository;
     }
 
     public String loginUser(String username, String password) {
@@ -61,6 +64,7 @@ public class UserDataService {
         user.setRoles(new HashSet<>() {{
             add(role);
         }});
+//        customizedProfileCrudRepository.save();
 
         return customizedUserCrudRepository.save(user);
     }

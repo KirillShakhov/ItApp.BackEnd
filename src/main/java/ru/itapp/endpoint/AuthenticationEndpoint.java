@@ -42,11 +42,11 @@ public class AuthenticationEndpoint {
                 .username(payload.getUsername())
                 .email(payload.getEmail())
                 .password(payload.getPassword())
-                .userProfile(Profile
-                        .builder()
-                        .displayName(payload.getName())
-                        .profilePictureUrl(payload.getProfilePicUrl())
-                        .build())
+//                .userProfile(Profile
+//                        .builder()
+//                        .displayName(payload.getName())
+//                        .profilePictureUrl(payload.getProfilePicUrl())
+//                        .build())
                 .build();
 
         try {
