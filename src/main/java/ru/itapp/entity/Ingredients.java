@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "products", schema = "public")
+@Table(name = "ingredients", schema = "public")
 public class Ingredients {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

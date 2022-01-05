@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "recipes", schema = "public")
+@Table(name = "recipe_steps", schema = "public")
 public class RecipeStep {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
