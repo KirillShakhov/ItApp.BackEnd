@@ -23,11 +23,11 @@ public class RecipeCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "category_id")
-    @JsonView(View.Recipe.class)
+    @JsonView(View.RecipeCategory.class)
     private Long id;
 
     @Column(name = "name", nullable = false)
-    @JsonView(View.Category.class)
+    @JsonView(View.RecipeCategory.class)
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
