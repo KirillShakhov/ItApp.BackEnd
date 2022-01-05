@@ -49,12 +49,13 @@ public class Recipe {
     private RecipeCategory category;
 
     @OneToMany(mappedBy = "recipe")
+    @ToString.Exclude
     Set<Ingredients> ingredients;
-
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonView(View.Recipe.class)
+    @ToString.Exclude
     private List<RecipeStep> steps;
 
     @Override

@@ -57,7 +57,7 @@ public class UserDataService {
                     String.format("email %s already exists", user.getEmail()));
         }
         user.setActive(true);
-        user.setPass(passwordEncoder.encode(user.getPass()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>() {{
             add(role);
         }});

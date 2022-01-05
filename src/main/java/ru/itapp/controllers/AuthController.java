@@ -50,7 +50,7 @@ public class AuthController {
         map.put("status", "ok");
         try {
             if (userDataService.getById(login).isEmpty()) throw new Exception("Аккаунта не существует");
-            else if (!userDataService.getById(login).get().getPass().equals(pass))
+            else if (!userDataService.getById(login).get().getPassword().equals(pass))
                 throw new Exception("Пароль неправильный");
             return map;
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class AuthController {
         try {
             Optional<User> user = userDataService.getById(login);
             if (user.isEmpty()) throw new Exception("Аккаунта не существует");
-            else if (!user.get().getPass().equals(pass)) throw new Exception("Пароль неправильный");
+            else if (!user.get().getPassword().equals(pass)) throw new Exception("Пароль неправильный");
             if (user_id == null) {
                 map.put("list", user.get());
             } else {

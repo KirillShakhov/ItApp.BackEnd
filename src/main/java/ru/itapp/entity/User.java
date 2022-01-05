@@ -12,9 +12,10 @@ import java.util.*;
 @Setter
 @ToString
 @Builder
-@RequiredArgsConstructor
 @Entity
 @Table(name = "users", schema = "public")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @Column(name = "username", unique = true, nullable = false)
@@ -23,21 +24,27 @@ public class User {
 
     @Column(name = "active", unique = true, nullable = false)
     @JsonView(View.User.class)
-    private boolean active;
+    private boolean active = false;
 
     @Column(name = "email", unique = true, nullable = false)
     @JsonView(View.User.class)
     private String email;
 
 
+    @OneToOne
+    @JoinColumn(name = "user_profile_ID")
     private Profile userProfile;
 
     @Column(name = "pass", nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany()
+    @JoinTable(
+            name = "users_and_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     @ToString.Exclude
-    private HashSet<Role> roles;
+    private Set<Role> roles;
 
 
     @Column(name = "registration_date", nullable = false)
@@ -48,7 +55,7 @@ public class User {
     public User(String login, String email, String pass) {
         this.username = login;
         this.email = email;
-        this.pass = pass;
+        this.password = pass;
         this.registration_date = java.util.Calendar.getInstance().getTime();
     }
 
@@ -56,7 +63,7 @@ public class User {
         active = user.active;
         username = user.username;
         email = user.email;
-        pass = user.pass;
+        password = user.password;
         registration_date = user.registration_date;
         roles = user.getRoles();
     }
@@ -72,9 +79,5 @@ public class User {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public void setActive(boolean b) {
-
     }
 }
