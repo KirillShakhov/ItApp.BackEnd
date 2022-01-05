@@ -21,11 +21,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @JsonView(View.Recipe.class)
+    @JsonView(View.Product.class)
     private Long id;
 
     @Column(name = "name", nullable = false)
-    @JsonView(View.Category.class)
+    @JsonView(View.Product.class)
     private String name;
 
     @OneToMany(mappedBy = "product")
