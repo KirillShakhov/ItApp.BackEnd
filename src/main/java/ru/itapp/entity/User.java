@@ -11,6 +11,7 @@ import java.util.*;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
 @Entity
 @Table(name = "users", schema = "public")
@@ -29,10 +30,13 @@ public class User {
     private String email;
 
 
+    private Profile userProfile;
+
     @Column(name = "pass", nullable = false)
-    private String pass;
+    private String password;
 
     @ManyToMany
+    @ToString.Exclude
     private HashSet<Role> roles;
 
 
@@ -46,6 +50,15 @@ public class User {
         this.email = email;
         this.pass = pass;
         this.registration_date = java.util.Calendar.getInstance().getTime();
+    }
+
+    public User(User user){
+        active = user.active;
+        username = user.username;
+        email = user.email;
+        pass = user.pass;
+        registration_date = user.registration_date;
+        roles = user.getRoles();
     }
 
     @Override

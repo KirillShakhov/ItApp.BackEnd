@@ -8,4 +8,5 @@ public class View {
     public interface RecipeCategory { }
     public interface RecipeStep { }
     public interface Ingredients { }
+    public interface Profile { }
 }
