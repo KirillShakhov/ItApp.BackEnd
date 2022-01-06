@@ -29,9 +29,7 @@ public class RecipeController {
 
     @JsonView(View.Recipe.class)
     @GetMapping("/recipes")
-    public Map<String, Object> info(@RequestParam("login") String login,
-                                    @RequestParam("pass") String pass,
-                                    @RequestParam(value = "id", required = false) String user_id) {
+    public Map<String, Object> recipes(@RequestParam(value = "find", required = false) String find) {
         Map<String, Object> map = new ManagedMap<>();
         map.put("status", "ok");
         try {

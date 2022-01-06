@@ -32,6 +32,10 @@ public class Recipe {
     @JsonView(View.Recipe.class)
     private Integer kcal;
 
+    @Column(name = "cooking_time", nullable = false)
+    @JsonView(View.Recipe.class)
+    private String cookingTime;
+
     @Column(name = "proteins", nullable = false)
     @JsonView(View.Recipe.class)
     private Double proteins;
@@ -54,7 +58,6 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonView(View.Recipe.class)
     @ToString.Exclude
     private List<RecipeStep> steps;
 
