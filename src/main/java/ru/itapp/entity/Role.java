@@ -15,10 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "roles", schema = "public")
 public class Role {
-
-    @Transient
-    public final static Role USER = new Role(1L, "USER", new HashSet<>());
-
     @Id
     @Column(name = "id", nullable = false)
     private Long id;

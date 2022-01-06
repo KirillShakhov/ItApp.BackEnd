@@ -18,15 +18,22 @@ import ru.itapp.payload.ApiResponse;
 import ru.itapp.payload.JwtAuthenticationResponse;
 import ru.itapp.payload.LoginRequest;
 import ru.itapp.payload.SignUpRequest;
+import ru.itapp.services.RoleDataService;
 import ru.itapp.services.UserDataService;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashSet;
 
 @RestController
 @Slf4j
 public class AuthenticationEndpoint {
-    @Autowired
-    private UserDataService userService;
+    private final UserDataService userService;
+    private RoleDataService roleDataService;
+
+    public AuthenticationEndpoint(UserDataService userService, RoleDataService roleDataService) {
+        this.userService = userService;
+        this.roleDataService = roleDataService;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -50,7 +57,9 @@ public class AuthenticationEndpoint {
                 .build();
 
         try {
-            userService.registerUser(user, Role.USER);
+            Role role = new Role(1L, "USER", new HashSet<>());
+            roleDataService.save(role);
+            userService.registerUser(user, role);
         } catch (UsernameAlreadyExistsException | EmailAlreadyExistsException e) {
             throw new BadRequestException(e.getMessage());
         }

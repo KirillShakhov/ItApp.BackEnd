@@ -22,7 +22,7 @@ public class User {
     @JsonView(View.User.class)
     private String username;
 
-    @Column(name = "active", unique = true, nullable = false)
+    @Column(name = "active", nullable = false)
     @JsonView(View.User.class)
     private boolean active = false;
 
