@@ -56,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/recipes/info").permitAll()
                 .antMatchers(HttpMethod.GET, "/menu").permitAll()
                 .antMatchers(HttpMethod.GET, "/menu/info").permitAll()
+                .antMatchers(HttpMethod.GET, "/menu/select").authenticated()
+                .antMatchers(HttpMethod.GET, "/menu/select/set").authenticated()
                 .anyRequest().authenticated();
     }
 
