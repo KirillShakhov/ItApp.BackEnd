@@ -28,9 +28,13 @@ public class Recipe {
     @JsonView(View.Recipe.class)
     private String name;
 
+    @Column(name = "image", nullable = false)
+    @JsonView(View.Recipe.class)
+    private String image;
+
     @Column(name = "kcal", nullable = false)
     @JsonView(View.Recipe.class)
-    private Integer kcal;
+    private Double kcal;
 
     @Column(name = "cooking_time", nullable = false)
     @JsonView(View.Recipe.class)
@@ -54,11 +58,13 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe")
     @ToString.Exclude
+    @JsonView(View.RecipeAllInfo.class)
     Set<Ingredients> ingredients;
 
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonView(View.RecipeAllInfo.class)
     private List<RecipeStep> steps;
 
     @Override

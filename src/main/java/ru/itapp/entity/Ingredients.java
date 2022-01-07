@@ -24,6 +24,7 @@ public class Ingredients {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonView(View.Ingredients.class)
     Product product;
 
     @ManyToOne

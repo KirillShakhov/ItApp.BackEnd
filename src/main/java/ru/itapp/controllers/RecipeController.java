@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itapp.entity.Recipe;
-import ru.itapp.entity.User;
 import ru.itapp.entity.View;
 import ru.itapp.services.RecipeDataService;
 import ru.itapp.services.UserDataService;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class RecipeController {
@@ -35,6 +32,21 @@ public class RecipeController {
         try {
             List<Recipe> recipes = recipeDataService.findAll();
             map.put("list", recipes);
+            return map;
+        } catch (Exception e) {
+            map.put("status", "error");
+            map.put("message", e.getMessage());
+            return map;
+        }
+    }
+    @JsonView(View.RecipeAllInfo.class)
+    @GetMapping("/recipes/info")
+    public Map<String, Object> recipes(@RequestParam(value = "id") Long id) {
+        Map<String, Object> map = new ManagedMap<>();
+        map.put("status", "ok");
+        try {
+            Optional<Recipe> recipe = recipeDataService.getById(id);
+            map.put("item", recipe);
             return map;
         } catch (Exception e) {
             map.put("status", "error");

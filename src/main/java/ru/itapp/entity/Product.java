@@ -21,15 +21,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @JsonView(View.Product.class)
     private Long id;
 
     @Column(name = "name", nullable = false)
     @JsonView(View.Product.class)
     private String name;
-
-    @OneToMany(mappedBy = "product")
-    Set<Ingredients> ingredients;
 
     @Override
     public int hashCode() {

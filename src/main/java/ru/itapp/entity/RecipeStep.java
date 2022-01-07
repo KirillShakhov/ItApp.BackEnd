@@ -27,7 +27,6 @@ public class RecipeStep {
     @JsonView(View.RecipeStep.class)
     private String image;
 
-    @Lob
     @Column(name = "text", nullable = false)
     @JsonView(View.RecipeStep.class)
     private String text;
