@@ -88,13 +88,14 @@ public class MenuController {
     @GetMapping(value = "/menu/select")
     @PreAuthorize("hasRole('USER') or hasRole('USER')")
     @ResponseStatus(HttpStatus.OK)
-    public Map<String, String> getSelectedMenu(@AuthenticationPrincipal InstaUserDetails userDetails) {
-        Map<String, String> map = new ManagedMap<>();
+    public Map<String, Object> getSelectedMenu(@AuthenticationPrincipal InstaUserDetails userDetails) {
+        Map<String, Object> map = new ManagedMap<>();
         map.put("status", "ok");
         try {
             Optional<User> user = userDataService.getById(userDetails.getUsername());
             if (user.isEmpty()) throw new Exception("Пользователь не найден");
-            map.put("id", String.valueOf(user.get().getSelectedMenu()==null?"":user.get().getSelectedMenu().getId()));
+            if(user.get().getSelectedMenu() == null) throw new Exception("Нет выбранного");
+            map.put("id", user.get().getSelectedMenu().getId());
             return map;
         } catch (Exception e) {
             map.put("status", "error");

@@ -63,3 +63,10 @@ VALUES (1, 3),(1,2);
 
 INSERT INTO menus_tuesday (menu_id, tuesday_id)
 VALUES (1, 3),(1,2);
+
+
+INSERT INTO menus (id, name, image, description)
+VALUES (2, 'Меню', 'https://static.mk.ru/upload/entities/2020/05/17/20/articles/detailPicture/f9/20/65/6d/2791f88205d6c1f158784037c400a4a9.jpg', 'Легкое меню для ...');
+
+INSERT INTO menus (id, name, image, description)
+VALUES (3, 'Ресторан', 'https://www.restoran.ru/upload/resize_cache/iblock/2fb/1920_1080_11a88371ca9e7ba72ce6f5767ba9eff1a/3.jpg', 'Ресторан ...');
