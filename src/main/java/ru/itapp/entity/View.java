@@ -10,4 +10,6 @@ public class View {
     public interface RecipeStep { }
     public interface Ingredients extends Product { }
     public interface Profile { }
+    public interface Menu { }
+    public interface MenuAllInfo extends Menu, Recipe { }
 }

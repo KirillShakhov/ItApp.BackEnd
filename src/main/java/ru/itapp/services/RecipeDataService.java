@@ -25,6 +25,9 @@ public class RecipeDataService {
     }
 
     @Transactional
+    public List<Recipe> findByName(String name) {return customizedRecipeCrudRepository.findByName(name);}
+
+    @Transactional
     public void save(Recipe recipe) {
         customizedRecipeCrudRepository.save(recipe);
     }

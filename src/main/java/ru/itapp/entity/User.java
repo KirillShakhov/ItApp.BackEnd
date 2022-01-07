@@ -30,6 +30,11 @@ public class User {
     @JsonView(View.User.class)
     private String email;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "selected_menu")
+    @ToString.Exclude
+    private Menu selectedMenu;
+
 
 //    @OneToOne
 //    @JoinColumn(name = "user_profile_ID")

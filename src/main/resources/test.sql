@@ -50,3 +50,16 @@ VALUES (1, 1, '200 г', 3),
        (7, 7, '', 3),
        (8, 8, '2 ст.л.', 3),
        (9, 9, '', 3)
+
+
+INSERT INTO recipes (id, name, kcal, proteins, fats, carbohydrates, cooking_time, image)
+VALUES (4, 'Салат Цезарь2', 232.6, 6.4, 16.7, 15.3, '30 minutes', 'https://www.gastronom.ru/binfiles/images/20180116/bd80b965.jpg');
+
+INSERT INTO menus (id, name, image, description)
+VALUES (1, 'Легкое меню', 'https://static.mk.ru/upload/entities/2020/05/17/20/articles/detailPicture/f9/20/65/6d/2791f88205d6c1f158784037c400a4a9.jpg', 'Легкое меню для ...');
+
+INSERT INTO menus_monday (menu_id, monday_id)
+VALUES (1, 3),(1,2);
+
+INSERT INTO menus_tuesday (menu_id, tuesday_id)
+VALUES (1, 3),(1,2);

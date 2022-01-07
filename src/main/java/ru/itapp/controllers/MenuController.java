@@ -6,37 +6,34 @@ import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itapp.entity.Recipe;
+import ru.itapp.entity.Menu;
 import ru.itapp.entity.View;
-import ru.itapp.services.RecipeDataService;
+import ru.itapp.services.MenuDataService;
 import ru.itapp.services.UserDataService;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
-public class RecipeController {
+public class MenuController {
     private final UserDataService userDataService;
-    private final RecipeDataService recipeDataService;
+    private final MenuDataService menuDataService;
 
     @Autowired
-    public RecipeController(UserDataService userDataService, RecipeDataService recipeDataService) {
+    public MenuController(UserDataService userDataService, MenuDataService menuDataService) {
         this.userDataService = userDataService;
-        this.recipeDataService = recipeDataService;
+        this.menuDataService = menuDataService;
     }
 
-    @JsonView(View.Recipe.class)
-    @GetMapping("/recipes")
-    public Map<String, Object> recipes(@RequestParam(value = "find", required = false) String find) {
+    @JsonView(View.Menu.class)
+    @GetMapping("/menu")
+    public Map<String, Object> menus() {
         Map<String, Object> map = new ManagedMap<>();
         map.put("status", "ok");
         try {
-            if(find == null) {
-                List<Recipe> recipes = recipeDataService.findAll();
-                map.put("list", recipes);
-            }else{
-                List<Recipe> recipes = recipeDataService.findByName(find);
-                map.put("list", recipes);
-            }
+            List<Menu> recipes = menuDataService.findAll();
+            map.put("list", recipes);
             return map;
         } catch (Exception e) {
             map.put("status", "error");
@@ -44,14 +41,15 @@ public class RecipeController {
             return map;
         }
     }
-    @JsonView(View.RecipeAllInfo.class)
-    @GetMapping("/recipes/info")
-    public Map<String, Object> recipes(@RequestParam(value = "id") Long id) {
+
+    @JsonView(View.MenuAllInfo.class)
+    @GetMapping("/menu/info")
+    public Map<String, Object> menus(@RequestParam(value = "id") Long id) {
         Map<String, Object> map = new ManagedMap<>();
         map.put("status", "ok");
         try {
-            Optional<Recipe> recipe = recipeDataService.getById(id);
-            map.put("item", recipe);
+            Optional<Menu> menu = menuDataService.getById(id);
+            map.put("item", menu);
             return map;
         } catch (Exception e) {
             map.put("status", "error");
