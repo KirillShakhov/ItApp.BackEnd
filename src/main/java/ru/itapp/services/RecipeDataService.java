@@ -28,6 +28,9 @@ public class RecipeDataService {
     public List<Recipe> findByName(String name) {return customizedRecipeCrudRepository.findByName(name);}
 
     @Transactional
+    public List<Recipe> findByNameIsContaining(String name) {return customizedRecipeCrudRepository.findByNameIsContaining(name);}
+
+    @Transactional
     public void save(Recipe recipe) {
         customizedRecipeCrudRepository.save(recipe);
     }
