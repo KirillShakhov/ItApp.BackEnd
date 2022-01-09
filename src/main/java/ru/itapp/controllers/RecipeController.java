@@ -34,7 +34,7 @@ public class RecipeController {
                 List<Recipe> recipes = recipeDataService.findAll();
                 map.put("list", recipes);
             }else{
-                List<Recipe> recipes = recipeDataService.findByNameIsContaining(find.toLowerCase());
+                List<Recipe> recipes = recipeDataService.findByNameIsContaining(find);
                 map.put("list", recipes);
             }
             return map;

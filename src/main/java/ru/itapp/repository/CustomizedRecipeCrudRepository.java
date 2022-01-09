@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface CustomizedRecipeCrudRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findByName(String name);
-    List<Recipe> findByNameIsContaining(String name);
+    List<Recipe> findByNameContainingIgnoreCase(String name);
 }
